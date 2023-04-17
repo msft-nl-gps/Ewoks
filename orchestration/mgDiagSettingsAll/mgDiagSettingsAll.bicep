@@ -28,30 +28,30 @@ param parTelemetryOptOut bool = false
 
 var varMgIds = {
   intRoot: '${parTopLevelManagementGroupPrefix}${parTopLevelManagementGroupSuffix}'
-  platform: '${parTopLevelManagementGroupPrefix}platform${parTopLevelManagementGroupSuffix}'
-  platformManagement: '${parTopLevelManagementGroupPrefix}platform-management${parTopLevelManagementGroupSuffix}'
-  platformConnectivity: '${parTopLevelManagementGroupPrefix}platform-connectivity${parTopLevelManagementGroupSuffix}'
-  platformIdentity: '${parTopLevelManagementGroupPrefix}platform-identity${parTopLevelManagementGroupSuffix}'
-  landingZones: '${parTopLevelManagementGroupPrefix}landingzones${parTopLevelManagementGroupSuffix}'
-  decommissioned: '${parTopLevelManagementGroupPrefix}decommissioned${parTopLevelManagementGroupSuffix}'
-  sandbox: '${parTopLevelManagementGroupPrefix}sandbox${parTopLevelManagementGroupSuffix}'
+  platform: '${parTopLevelManagementGroupPrefix}Platform${parTopLevelManagementGroupSuffix}'
+  platformManagement: '${parTopLevelManagementGroupPrefix}Platform-management${parTopLevelManagementGroupSuffix}'
+  platformConnectivity: '${parTopLevelManagementGroupPrefix}Platform-connectivity${parTopLevelManagementGroupSuffix}'
+  platformIdentity: '${parTopLevelManagementGroupPrefix}Platform-identity${parTopLevelManagementGroupSuffix}'
+  landingZones: '${parTopLevelManagementGroupPrefix}Landingzones${parTopLevelManagementGroupSuffix}'
+  decommissioned: '${parTopLevelManagementGroupPrefix}Decommissioned${parTopLevelManagementGroupSuffix}'
+  sandbox: '${parTopLevelManagementGroupPrefix}Sandbox${parTopLevelManagementGroupSuffix}'
 }
 
 // Used if parLandingZoneMgAlzDefaultsEnable == true
 var varLandingZoneMgChildrenAlzDefault = {
-  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-landingzones-corp${parTopLevelManagementGroupSuffix}'
-  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-landingzones-online${parTopLevelManagementGroupSuffix}'
+  landingZonesCorp: '${parTopLevelManagementGroupPrefix}Landingzones-corp${parTopLevelManagementGroupSuffix}'
+  landingZonesOnline: '${parTopLevelManagementGroupPrefix}Landingzones-online${parTopLevelManagementGroupSuffix}'
 }
 
 // Used if parLandingZoneMgConfidentialEnable == true
 var varLandingZoneMgChildrenConfidential = {
-  landingZonesConfidentialCorp: '${parTopLevelManagementGroupPrefix}-landingzones-confidential-corp${parTopLevelManagementGroupSuffix}'
-  landingZonesConfidentialOnline: '${parTopLevelManagementGroupPrefix}-landingzones-confidential-online${parTopLevelManagementGroupSuffix}'
+  landingZonesConfidentialCorp: '${parTopLevelManagementGroupPrefix}Landingzones-confidential-corp${parTopLevelManagementGroupSuffix}'
+  landingZonesConfidentialOnline: '${parTopLevelManagementGroupPrefix}Landingzones-confidential-online${parTopLevelManagementGroupSuffix}'
 }
 
 // Used if parLandingZoneMgConfidentialEnable not empty
 var varLandingZoneMgCustomChildren = [for customMg in parLandingZoneMgChildren: {
-  mgId: '${parTopLevelManagementGroupPrefix}-landingzones-${customMg}${parTopLevelManagementGroupSuffix}'
+  mgId: '${parTopLevelManagementGroupPrefix}Landingzones-${customMg}${parTopLevelManagementGroupSuffix}'
 }]
 
 // Build final object based on input parameters for default and confidential child MGs of LZs
