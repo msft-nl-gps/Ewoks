@@ -1,4 +1,4 @@
-name: Deploy Central Logging
+name: 4 - Deploy Central Logging
 
 on:
   workflow_dispatch:

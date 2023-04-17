@@ -1,4 +1,4 @@
-name: MGs Diagnostic Settings Orchestration
+name: 5 - MGs Diagnostic Settings Orchestration
 
 on:
   workflow_dispatch:

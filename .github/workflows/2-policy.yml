@@ -1,4 +1,4 @@
-name: Process Policies
+name: 2 - Process Policies
 
 on:
   workflow_dispatch:
