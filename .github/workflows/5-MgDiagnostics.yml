@@ -30,7 +30,7 @@ jobs:
         name: Deploy Management Groups Diagnostic Settings
         id: deployMGsDiagSettings
         with:
-          scope: managementGroup
+          scope: managementgroup
           region: westeurope
           managementgroupid: ${{ inputs.Ewoks_MG_Resource_Id }}
           subscriptionId: ${{ inputs.Subscription_Id }}
