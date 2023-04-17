@@ -1,9 +1,9 @@
 name: Process Custom RBAC role definitions
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
-      Top_Management_Group_Id:
+      ewoks_Management_Group_Id:
         required: true
         type: string
 
@@ -32,8 +32,8 @@ jobs:
         with:
           scope: managementgroup
           region: westeurope
-          managementgroupid: ${{ inputs.Top_Management_Group_Id }}
-          template: modules/customRoleDefinitions/customRoleDefinitions.bicep
+          managementgroupid: ${{ inputs.ewoks_Management_Group_Id }}
+          template: ./modules/customRoleDefinitions/customRoleDefinitions.bicep
           parameters: >
-            modules/customRoleDefinitions/parameters/customRoleDefinitions.parameters.all.json
-            parAssignableScopeManagementGroupId="${{ inputs.Top_Management_Group_Id }}"
+            ./modules/customRoleDefinitions/parameters/customRoleDefinitions.parameters.all.json
+            parAssignableScopeManagementGroupId="${{ inputs.ewoks_Management_Group_Id }}"
