@@ -34,7 +34,7 @@ jobs:
           region: westeurope
           subscriptionId: ${{ inputs.Subscription_Id }}
           template: ARMtemplates/resourceGroup.json
-          parameters: modules/logging/parameters/resourceGroup.parameters.json
+          parameters: ./modules/logging/parameters/resourceGroup.parameters.json
 
       - uses: azure/arm-deploy@v1 
         name: Deploy logging
@@ -43,5 +43,5 @@ jobs:
           scope: resourcegroup
           region: westeurope
           resourcegroupid: ${{ steps.resourceGroupLogging.outputs.resourceGroupName }}
-          template: modules/logging/Logging.bicep
-          parameters: modules/logging/logging.parameters.all.json
+          template: ./modules/logging/logging.bicep
+          parameters: ./modules/logging/logging.parameters.all.json
