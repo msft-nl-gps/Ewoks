@@ -1,4 +1,4 @@
-name: Process Policy Definitions and Assignments
+name: Process Policies
 
 on:
   workflow_dispatch:
