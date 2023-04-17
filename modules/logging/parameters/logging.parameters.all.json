@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "parLogAnalyticsWorkspaceName": {
+        "value": "ewoks-log-analytics"
+      },
+      "parLogAnalyticsWorkspaceLocation": {
+        "value": "westeurope"
+      },
+      "parLogAnalyticsWorkspaceSkuName": {
+        "value": "PerGB2018"
+      },
+      "parLogAnalyticsWorkspaceLogRetentionInDays": {
+        "value": 180
+      },
+      "parLogAnalyticsWorkspaceSolutions": {
+        "value": [
+          "AgentHealthAssessment",
+          "AntiMalware",
+          "ChangeTracking",
+          "Security",
+          "SecurityInsights",
+          "ServiceMap",
+          "SQLAdvancedThreatProtection",
+          "SQLVulnerabilityAssessment",
+          "SQLAssessment",
+          "Updates",
+          "VMInsights"
+        ]
+      },
+      "parAutomationAccountName": {
+        "value": "ewoks-automation-account"
+      },
+      "parAutomationAccountLocation": {
+        "value": "westeurope"
+      },
+      "parAutomationAccountUseManagedIdentity": {
+        "value": true
+      },
+      "parTags": {
+        "value": {
+          "Environment": "POC"
+        }
+      },
+      "parTelemetryOptOut": {
+        "value": false
+      }
+    }
+  }  
