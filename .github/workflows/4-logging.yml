@@ -33,7 +33,7 @@ jobs:
           scope: subscription
           region: westeurope
           subscriptionId: ${{ inputs.Subscription_Id }}
-          template: ARMtemplates/resourceGroup.json
+          template: ./modules/logging/resourceGroup.bicep
           parameters: ./modules/logging/parameters/resourceGroup.parameters.json
 
       - uses: azure/arm-deploy@v1 
