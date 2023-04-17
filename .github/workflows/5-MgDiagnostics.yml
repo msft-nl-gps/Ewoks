@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  deploy-central-logging:
+  deploy-mg-diagnostic-settings:
     runs-on: [self-hosted, linux]
     
     permissions:
@@ -33,6 +33,5 @@ jobs:
           scope: managementgroup
           region: westeurope
           managementgroupid: ${{ inputs.Ewoks_MG_Resource_Id }}
-          subscriptionId: ${{ inputs.Subscription_Id }}
           template: ./orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bicep
-          parameters: ./orchestration/mgDiagSettingsAll/parameters/bicepconfig.json
+          parameters: ./orchestration/mgDiagSettingsAll/parameters/mgDiagSettingsAll.parameters.json
