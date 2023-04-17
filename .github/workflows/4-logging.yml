@@ -42,6 +42,6 @@ jobs:
         with:
           scope: resourcegroup
           region: westeurope
-          resourcegroupid: ${{ steps.resourceGroupLogging.outputs.resourceGroupName }}
+          resourcegroupid: ${{ steps.resourceGroupLogging.outputs.parResourceGroupName }}
           template: ./modules/logging/logging.bicep
           parameters: ./modules/logging/logging.parameters.all.json
