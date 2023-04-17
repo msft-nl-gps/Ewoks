@@ -1,7 +1,7 @@
 name: Login to Azure
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       az_powershell_min_version:
         required: true
