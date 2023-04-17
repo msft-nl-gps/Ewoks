@@ -1,0 +1,74 @@
+name: Process Policy Definitions and Assignments
+
+on:
+  workflow_call:
+    inputs:
+      az_powershell_min_version:
+        required: true
+        type: string
+      Andor_MG_Resource_Id:
+        required: true
+        type: string
+      Platform_MG_Resource_Id:
+        required: true
+        type: string
+      Connectivity_MG_Resource_Id:
+        required: true
+        type: string
+      Identity_MG_Resource_Id:
+        required: true
+        type: string
+      Management_MG_Resource_Id:
+        required: true
+        type: string
+      Landing_Zones_MG_Resource_Id:
+        required: true
+        type: string
+      Corp_MG_Resource_Id:
+        required: true
+        type: string
+      Online_MG_Resource_Id:
+        required: true
+        type: string
+      Decommisioned_MG_Resource_Id:
+        required: true
+        type: string
+      Sandbox_MG_Resource_Id:
+        required: true
+        type: string
+
+jobs:
+  deploy-policy-definitions-and-assignments:
+    runs-on: [self-hosted, linux]
+
+    env:
+      az_powershell_min_version: ${{ inputs.az_powershell_min_version }}
+      # why set these 2 env vars?  They are not used in this workflow
+      top_management_resource_group_id: ${{ inputs.Andor_MG_Resource_Id }}
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          allow-no-subscriptions: true
+          enable-AzPSSession: true
+      
+      - uses: azure/arm-deploy@v1 
+        name: Deploy custom policy definitions
+        id: customPolicyDefinitions
+        with:
+          scope: managementgroup
+          region: westeurope
+          managementgroupid: ${{ inputs.Andor_MG_Resource_Id }}
+          template: modules/policy/definitions/customPolicyDefinitions.bicep
+          parameters: >
+            modules/policy/definitions/parameters/customPolicyDefinitions.parameters.all.json
+            parTargetManagementGroupId="${{ inputs.Andor_MG_Resource_Id }}"
