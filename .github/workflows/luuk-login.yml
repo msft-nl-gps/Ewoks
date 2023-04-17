@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  deploy-management-groups:
+  login-to-azure:
     runs-on: [self-hosted, linux]
 
     env:
