@@ -6,6 +6,9 @@ on:
       az_powershell_min_version:
         required: true
         type: string
+    push:
+      branches:
+      - 'master'
     outputs:
       Ewoks_MG_Resource_Id:
         description: 'Resource ID of the Ewoks Management Group'
