@@ -1,0 +1,45 @@
+name: Deploy Azure Enterprise Scale Landing Zone
+on:
+  push:
+      branches: [ main ]
+  workflow_dispatch:
+
+
+jobs:
+  process-management-groups:
+    uses: ./.github/workflows/1-process-management-groups.yml
+    with: 
+      az_powershell_min_version: ${{ vars.AZ_POWERSHELL_MIN_VERSION }}
+    secrets: inherit
+
+  policy-definitions-and-assignments:
+    uses: ./.github/workflows/2-policy-definitions-and-assignments.yml
+    needs: process-management-groups
+    with: 
+      az_powershell_min_version: ${{ vars.AZ_POWERSHELL_MIN_VERSION }}
+      Andor_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Andor_MG_Resource_Id }}
+      Platform_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Platform_MG_Resource_Id }}
+      Connectivity_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Connectivity_MG_Resource_Id }}
+      Identity_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Identity_MG_Resource_Id }}
+      Management_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Management_MG_Resource_Id }}
+      Landing_Zones_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Landing_Zones_MG_Resource_Id }}
+      Corp_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Corp_MG_Resource_Id }}
+      Online_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Online_MG_Resource_Id }}
+      Decommisioned_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Decommisioned_MG_Resource_Id }}
+      Sandbox_MG_Resource_Id: ${{ needs.process-management-groups.outputs.Sandbox_MG_Resource_Id }}
+    secrets: inherit
+
+  custom-rbac-role-definitions:
+    uses: ./.github/workflows/3-custom-rbac-role-definitions.yml
+    needs: process-management-groups
+    with:
+      Top_Management_Group_Id: ${{ needs.process-management-groups.outputs.Top_Management_Group_Id }}
+    secrets: inherit
+
+  deploy-logging:
+    uses: ./.github/workflows/4-deploy-logging.yml
+    needs: [process-management-groups, policy-definitions-and-assignments]
+    with:
+      Subscription_Id: '5100271a-e3c3-4311-a839-c6d8f9b40daa'
+    secrets: inherit
+    
