@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "parTopLevelManagementGroupPrefix": {
-      "value": "alz"
+      "value": ""
     },
     "parTopLevelManagementGroupSuffix": {
       "value": ""
@@ -15,7 +15,7 @@
       "value": false
     },
     "parLogAnalyticsWorkspaceResourceId": {
-      "value": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/alz-logging/providers/microsoft.operationalinsights/workspaces/alz-log-analytics"
+      "value": "/subscriptions/f546d538-01b7-4570-88ba-fc51cc6b61ac/resourceGroups/ewoks-mgt-p-log-01/providers/Microsoft.OperationalInsights/workspaces/ewoks-log-analytics"
     },
     "parLandingZoneMgChildren": {
       "value": []
