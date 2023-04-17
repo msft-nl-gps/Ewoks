@@ -1,0 +1,39 @@
+name: Process Custom RBAC role definitions
+
+on:
+  workflow_call:
+    inputs:
+      Top_Management_Group_Id:
+        required: true
+        type: string
+
+jobs:
+  deploy-custom-rbac-role-definitions:
+    runs-on: [self-hosted, linux]
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          allow-no-subscriptions: true
+          enable-AzPSSession: true
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy custom RBAC role definitions
+        id: customRbacRoleDefinitions
+        with:
+          scope: managementgroup
+          region: westeurope
+          managementgroupid: ${{ inputs.Top_Management_Group_Id }}
+          template: modules/customRoleDefinitions/customRoleDefinitions.bicep
+          parameters: >
+            modules/customRoleDefinitions/parameters/customRoleDefinitions.parameters.all.json
+            parAssignableScopeManagementGroupId="${{ inputs.Top_Management_Group_Id }}"
