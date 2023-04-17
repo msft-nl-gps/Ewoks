@@ -1,7 +1,7 @@
 name: Process Policies
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       az_powershell_min_version:
         required: true
@@ -9,35 +9,6 @@ on:
       Ewoks_MG_Resource_Id:
         required: true
         type: string
-      Platform_MG_Resource_Id:
-        required: true
-        type: string
-      Connectivity_MG_Resource_Id:
-        required: true
-        type: string
-      Identity_MG_Resource_Id:
-        required: true
-        type: string
-      Management_MG_Resource_Id:
-        required: true
-        type: string
-      Landing_Zones_MG_Resource_Id:
-        required: true
-        type: string
-      Corp_MG_Resource_Id:
-        required: true
-        type: string
-      Online_MG_Resource_Id:
-        required: true
-        type: string
-      Decommisioned_MG_Resource_Id:
-        required: true
-        type: string
-      Sandbox_MG_Resource_Id:
-        required: true
-        type: string
-    pushes:
-      - master
 
 jobs:
   deploy-policy-definitions-and-assignments:
