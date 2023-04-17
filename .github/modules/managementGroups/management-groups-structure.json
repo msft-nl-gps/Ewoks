@@ -1,0 +1,68 @@
+{
+    "id": "7b05c648-bc1d-4587-9ba4-b8dc074aa01f",
+    "type": "managementGroup",
+    "name": "Ewoks",
+    "children": [
+        {
+            "id": "78140d7b-fdb4-4294-b607-f7e4721f57cf",
+            "type": "managementGroup",
+            "name": "Platform",
+            "children": [
+                {
+                    "id": "febdc21a-7210-444f-b4c5-00e8dbeb7a45",
+                    "type": "managementGroup",
+                    "name": "Connectivity",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "b57f9a00-fde7-4785-950d-b9c9b7de9f42",
+                    "type": "managementGroup",
+                    "name": "Identity",
+                    "children": [
+                        
+                    ]
+                },
+                {
+                    "id": "ceae02aa-b390-44b3-ace6-5d18e86e4875",
+                    "type": "managementGroup",
+                    "name": "Management",
+                    "children": [
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "5dbf2aa4-3c90-48d5-bc9a-a2cbb7d82be0",
+            "type": "managementGroup",
+            "name": "Landing Zones",
+            "children": [
+                {
+                    "id": "22a7ad18-2831-41d3-a235-821388094943",
+                    "type": "managementGroup",
+                    "name": "Corp",
+                    "children": []
+                },
+                {
+                    "id": "cc67d716-e695-45e4-bdd2-0d6fd5373c48",
+                    "type": "managementGroup",
+                    "name": "Online",
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": "b2b8b176-30c1-4bbd-a33d-542bc080c3d8",
+            "type": "managementGroup",
+            "name": "Decommisioned",
+            "children": []
+        },
+        {
+            "id": "7b92f3d7-993a-482c-b115-65114f0f6634",
+            "type": "managementGroup",
+            "name": "Sandbox",
+            "children": []
+        }
+    ]
+}
