@@ -13,6 +13,11 @@
                     "type": "managementGroup",
                     "name": "Connectivity",
                     "children": [
+                        {
+                        "id": "613cefef-fdb2-4aa6-8225-2c3fac3dec2f",
+                        "type": "subscription",
+                        "name": "ME-MngEnvMCAP168626-bgrozoiu-1"
+                        }
 
                     ]
                 },
@@ -29,7 +34,12 @@
                     "type": "managementGroup",
                     "name": "Management",
                     "children": [
-                    ]
+                        {
+                        "id": "f546d538-01b7-4570-88ba-fc51cc6b61ac",
+                        "type": "subscription",
+                        "name": "ME-MngEnvMCAP168626-bgrozoiu-2"
+                        }                   
+                         ]
                 }
             ]
         },
