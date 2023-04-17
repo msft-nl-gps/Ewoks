@@ -5,7 +5,7 @@ on:
       inputs:
       az_powershell_min_version:
         required: true
-        type: string
+        type: '7.0'
   workflow_dispatch:
   push:
     branches:
