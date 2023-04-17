@@ -2,10 +2,11 @@ name: Login to Azure
 
 on:
   workflow_call:
-    inputs:
+      inputs:
       az_powershell_min_version:
         required: true
         type: string
+  workflow_dispatch:
 
 jobs:
   deploy-management-groups:
