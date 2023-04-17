@@ -6,6 +6,9 @@ on:
       Subscription_Id:
         required: true
         type: string
+      ResourceGroup_Id:
+        required: true
+        type: string
 
 jobs:
   deploy-central-logging:
@@ -42,6 +45,6 @@ jobs:
         with:
           scope: resourcegroup
           region: westeurope
-          resourcegroupid: ${{ steps.resourceGroup.outputs.outResourceGroupId }}
+          resourcegroupid: ${{ inputs.ResourceGroup_Id }}
           template: ./modules/logging/logging.bicep
           parameters: ./modules/logging/logging.parameters.all.json
