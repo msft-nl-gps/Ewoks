@@ -44,4 +44,4 @@ jobs:
           region: westeurope
           resourcegroupname: ${{ steps.resourceGroupLogging.outputs.outResourceGroupName }}
           template: ./modules/logging/logging.bicep
-          parameters: ./modules/logging/logging.parameters.json
+          parameters: ./modules/logging/parameters/logging.parameters.json
