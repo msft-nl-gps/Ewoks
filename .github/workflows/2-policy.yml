@@ -41,7 +41,7 @@ jobs:
           scope: managementgroup
           region: westeurope
           managementgroupid: ${{ inputs.Ewoks_MG_Resource_Id }}
-          template: modules/policy/definitions/customPolicyDefinitions.bicep
+          template: ./modules/policy/definitions/customPolicyDefinitions.bicep
           parameters: >
-            modules/policy/definitions/parameters/customPolicyDefinitions.parameters.all.json
+            ./modules/policy/definitions/parameters/customPolicyDefinitions.parameters.all.json
             parTargetManagementGroupId="${{ inputs.Ewoks_MG_Resource_Id }}"
