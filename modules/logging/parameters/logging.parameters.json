@@ -6,7 +6,7 @@
       "value": "ewoks-log-analytics"
     },
     "parLogAnalyticsWorkspaceLocation": {
-      "value": "eastus"
+      "value": "westeurope"
     },
     "parLogAnalyticsWorkspaceSkuName": {
       "value": "PerGB2018"
