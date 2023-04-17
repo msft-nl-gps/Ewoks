@@ -1,11 +1,7 @@
 name: Login to Azure
 
 on:
-  workflow_call:
-      inputs:
-      az_powershell_min_version:
-        required: true
-        type: '7.0'
+  
   workflow_dispatch:
   push:
     branches:
@@ -17,7 +13,7 @@ jobs:
     runs-on: [self-hosted, linux]
 
     env:
-      az_powershell_min_version: ${{ inputs.az_powershell_min_version }}
+      az_powershell_min_version: ${{ vars.inputs.az_powershell_min_version }}
 
     permissions:
       id-token: write
