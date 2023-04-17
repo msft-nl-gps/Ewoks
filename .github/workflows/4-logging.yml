@@ -6,10 +6,7 @@ on:
       Subscription_Id:
         required: true
         type: string
-      ResourceGroup_Id:
-        required: true
-        type: string
-
+        
 jobs:
   deploy-central-logging:
     runs-on: [self-hosted, linux]
