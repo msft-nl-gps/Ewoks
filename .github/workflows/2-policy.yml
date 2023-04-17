@@ -1,7 +1,7 @@
 name: Process Policies
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       az_powershell_min_version:
         required: true
@@ -36,6 +36,8 @@ on:
       Sandbox_MG_Resource_Id:
         required: true
         type: string
+    pushes:
+      - master
 
 jobs:
   deploy-policy-definitions-and-assignments:
