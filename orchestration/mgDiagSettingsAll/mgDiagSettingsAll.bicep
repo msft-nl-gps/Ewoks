@@ -4,9 +4,8 @@ metadata name = 'ALZ Bicep orchestration - Management Group Diagnostic Settings 
 metadata description = 'Orchestration module that helps enable Diagnostic Settings on the Management Group hierarchy as was defined during the deployment of the Management Group module'
 
 @sys.description('Prefix used for the management group hierarchy in the managementGroups module. Default: alz')
-@minLength(2)
-@maxLength(10)
-param parTopLevelManagementGroupPrefix string = 'Ewoks'
+
+param parTopLevelManagementGroupPrefix string = ''
 
 @sys.description('Optional suffix for the management group hierarchy. This suffix will be appended to management group names/IDs. Include a preceding dash if required. Example: -suffix')
 @maxLength(10)
