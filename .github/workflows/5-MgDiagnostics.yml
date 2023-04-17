@@ -3,7 +3,7 @@ name: MGs Diagnostic Settings Orchestration
 on:
   workflow_dispatch:
     inputs:
-      Subscription_Id:
+      Ewoks_MG_Resource_Id:
         required: true
         type: string
 
@@ -30,6 +30,8 @@ jobs:
         id: deployMGsDiagSettings
         with:
           scope: managementGroup
+          region: westeurope
+          managementgroupid: ${{ inputs.Ewoks_MG_Resource_Id }}
           subscriptionId: ${{ inputs.Subscription_Id }}
           template: ./orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bicep
           parameters: ./orchestration/mgDiagSettingsAll/parameters/bicepconfig.json
