@@ -1,0 +1,42 @@
+name: 5 - MGs Diagnostic Settings Orchestration
+
+on:
+  workflow_dispatch:
+    inputs:
+      az_powershell_min_version:
+        required: true
+        type: string
+
+jobs:
+  deploy-mg-diagnostic-settings:
+    runs-on: [self-hosted, linux]
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          allow-no-subscriptions: true
+          enable-AzPSSession: true
+
+        - shell: pwsh
+          name: Reading environment variables
+          run: |
+            Get-ChildItem env: | fl
+
+      - uses: azure/arm-deploy@v1
+        name: Deploy Management Groups Diagnostic Settings
+        id: deployMGsDiagSettings
+        with:
+          scope: managementgroup
+          region: westeurope
+          managementgroupid: ${{ MG_EWOKS_ID }}
+          template: ./orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bicep
+          parameters: ./orchestration/mgDiagSettingsAll/parameters/mgDiagSettingsAll.parameters.json
