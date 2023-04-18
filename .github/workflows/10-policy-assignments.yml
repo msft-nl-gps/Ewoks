@@ -1,4 +1,4 @@
-name: Process Policy Definitions and Assignments
+name: 10 - Process Policy Definitions and Assignments
 
 on:
   workflow_dispatch:
