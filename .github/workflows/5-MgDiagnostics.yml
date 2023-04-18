@@ -2,6 +2,10 @@ name: 5 - MGs Diagnostic Settings Orchestration
 
 on:
   workflow_dispatch:
+    inputs:
+      Ewoks_MG_Resource_Id:
+        required: true
+        type: string
 
 jobs:
   deploy-mg-diagnostic-settings:
@@ -28,5 +32,6 @@ jobs:
         with:
           scope: managementgroup
           region: westeurope
+          managementgroupid: ${{ inputs.Ewoks_MG_Resource_Id }}
           template: ./orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bicep
           parameters: ./orchestration/mgDiagSettingsAll/parameters/mgDiagSettingsAll.parameters.json
