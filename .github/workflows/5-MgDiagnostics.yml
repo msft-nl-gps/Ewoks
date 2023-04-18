@@ -26,10 +26,10 @@ jobs:
           allow-no-subscriptions: true
           enable-AzPSSession: true
 
-        - shell: pwsh
-          name: Reading environment variables
-          run: |
-            Get-ChildItem env: | fl
+      - shell: pwsh
+        name: Reading environment variables
+        run: |
+          Get-ChildItem env: | fl
 
       - uses: azure/arm-deploy@v1
         name: Deploy Management Groups Diagnostic Settings
