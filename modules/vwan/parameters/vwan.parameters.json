@@ -18,7 +18,7 @@
         "value": true
       },
       "parVirtualWanName": {
-        "value": "ewoks-vwan-eastus"
+        "value": "ewoks-vwan-westeurope"
       },
       "parVirtualWanHubName": {
         "value": "ewoks-vhub"
@@ -30,7 +30,7 @@
         "value": []
       },
       "parAzFirewallPoliciesName": {
-        "value": "ewoks-azfwpolicy-eastus"
+        "value": "ewoks-azfwpolicy-westeurope"
       },
       "parTags": {
         "value": {
