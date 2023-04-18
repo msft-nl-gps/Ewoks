@@ -114,7 +114,7 @@ resource resAzureFirewall 'Microsoft.Network/azureFirewalls@2022-05-01' = if (pa
   name: parAzFirewallName
   location: parLocation
   tags: parTags
-  zones: (!empty(parAzFirewallAvailabilityZones) ? parAzFirewallAvailabilityZones : json('null'))
+  zones: (!empty(parAzFirewallAvailabilityZones) ? parAzFirewallAvailabilityZones : null)
   properties: {
     hubIPAddresses: {
       publicIPs: {
