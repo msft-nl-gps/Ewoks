@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "parLocation": {
+        "value": "westeurope"
+      },
+      "parCompanyPrefix": {
+        "value": "ewoks"
+      },
+      "parAzFirewallTier": {
+        "value": "Standard"
+      },
+      "parVirtualHubEnabled": {
+        "value": true
+      },
+      "parAzFirewallDnsProxyEnabled": {
+        "value": true
+      },
+      "parVirtualWanName": {
+        "value": "ewoks-vwan-eastus"
+      },
+      "parVirtualWanHubName": {
+        "value": "ewoks-vhub"
+      },
+      "parVpnGatewayName": {
+        "value": "ewoks-vpngw"
+      },
+      "parExpressRouteGatewayName": {
+        "value": "ewoks-ergw"
+      },
+      "parAzFirewallName": {
+        "value": "ewoks-fw"
+      },
+      "parAzFirewallAvailabilityZones": {
+        "value": []
+      },
+      "parAzFirewallPoliciesName": {
+        "value": "ewoks-azfwpolicy-eastus"
+      },
+      "parVirtualWanHubs": {
+        "value": [
+          {
+            "parVpnGatewayEnabled": true,
+            "parExpressRouteGatewayEnabled": true,
+            "parAzFirewallEnabled": true,
+            "parVirtualHubAddressPrefix": "10.100.0.0/23",
+            "parHubLocation": "eastus",
+            "parHubRoutingPreference": "ExpressRoute",
+            "parVirtualRouterAutoScaleConfiguration": 2
+          }
+        ]
+      },
+      "parTags": {
+        "value": {
+          "Environment": "Live"
+        }
+      }
+    }
+  }  

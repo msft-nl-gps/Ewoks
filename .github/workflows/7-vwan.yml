@@ -1,0 +1,47 @@
+name: 7 - Deploy vwanConnectivity
+
+on:
+  workflow_dispatch:
+    inputs:
+      Subscription_Id:
+        required: true
+        type: string
+
+jobs:
+  deploy-vwan-connectivity:
+    runs-on: [self-hosted, linux]
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          subscription-id: ${{ inputs.Subscription_Id }}
+          enable-AzPSSession: true
+
+      - uses: azure/arm-deploy@v1
+        name: Create the Resource Group for vwan
+        id: resourceGroupVwan
+        with:
+          scope: subscription
+          region: westeurope
+          subscriptionId: ${{ inputs.Subscription_Id }}
+          template: ./modules/vwan/resourceGroup.bicep
+          parameters: ./modules/vwan/parameters/resourceGroup.parameters.json
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy vwan
+        id: deployCentralVwan
+        with:
+          scope: resourcegroup
+          region: westeurope
+          resourcegroupname: ${{ steps.resourceGroupVwan.outputs.outResourceGroupName }}
+          template: ./modules/vwan/vwan.bicep
+          parameters: ./modules/vwan/parameters/vwan.parameters.json
