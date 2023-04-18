@@ -1,0 +1,36 @@
+name: 9 - Connect Spoke Network to Vwan
+
+on:
+  workflow_dispatch:
+    inputs:
+      Subscription_Id:
+        required: true
+        type: string
+
+jobs:
+  deploy-vnet-peering-to-vwan:
+    runs-on: [self-hosted, linux]
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          subscription-id: ${{ inputs.Subscription_Id }}
+          enable-AzPSSession: true
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy Vnet Peering Vwan
+        id: deployVnetPeeringVwan
+        with:
+          scope: subscription
+          region: westeurope
+          template: ./modules/vnetPeeringVwan/vnetPeeringVwan.bicep
+          parameters: ./modules/vnetPeeringVwan/parameters/vnetPeeringVwan.parameters.json
