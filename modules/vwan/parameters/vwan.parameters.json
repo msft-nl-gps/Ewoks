@@ -23,12 +23,6 @@
       "parVirtualWanHubName": {
         "value": "ewoks-vhub"
       },
-      "parVpnGatewayName": {
-        "value": "ewoks-vpngw"
-      },
-      "parExpressRouteGatewayName": {
-        "value": "ewoks-ergw"
-      },
       "parAzFirewallName": {
         "value": "ewoks-fw"
       },
@@ -37,19 +31,6 @@
       },
       "parAzFirewallPoliciesName": {
         "value": "ewoks-azfwpolicy-eastus"
-      },
-      "parVirtualWanHubs": {
-        "value": [
-          {
-            "parVpnGatewayEnabled": true,
-            "parExpressRouteGatewayEnabled": true,
-            "parAzFirewallEnabled": true,
-            "parVirtualHubAddressPrefix": "10.100.0.0/23",
-            "parHubLocation": "eastus",
-            "parHubRoutingPreference": "ExpressRoute",
-            "parVirtualRouterAutoScaleConfiguration": 2
-          }
-        ]
       },
       "parTags": {
         "value": {
