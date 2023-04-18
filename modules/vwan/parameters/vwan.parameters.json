@@ -31,11 +31,6 @@
       },
       "parAzFirewallPoliciesName": {
         "value": "ewoks-azfwpolicy-westeurope"
-      },
-      "parTags": {
-        "value": {
-          "Environment": "Live"
-        }
       }
     }
   }  
