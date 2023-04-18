@@ -64,9 +64,9 @@ jobs:
           scope: managementgroup
           region: westeurope
           managementgroupid: ${{ inputs.Ewoks_MG_Resource_Id }}
-          template: modules/policy/assignment/alzDefault/alzDefaultPolicyAssignments.bicep
+          template: modules/policies/assignments/alzDefault/alzDefaultPolicyAssignments.bicep
           parameters: >
-            modules/policy/assignment/alzDefault/parameters/alzDefaultPolicyAssignments.parameters.all.json
+            modules/policies/assignments/alzDefault/parameters/alzDefaultPolicyAssignments.parameters.all.json
             parTopLevelManagementGroupPrefix="Ewoks"
             Top_MG_Resource_Id="${{ inputs.Ewoks_MG_Resource_Id }}"
             Platform_MG_Resource_Id="${{ inputs.Platform_MG_Resource_Id }}"
