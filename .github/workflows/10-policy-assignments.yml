@@ -68,7 +68,7 @@ jobs:
           parameters: >
             modules/policies/assignments/alzDefaults/parameters/alzDefaultPolicyAssignments.parameters.all.json
             parTopLevelManagementGroupPrefix="Ewoks"
-            Top_MG_Resource_Id="${{ inputs.Ewoks_MG_Resource_Id }}"
+            Ewoks_MG_Resource_Id="${{ inputs.Ewoks_MG_Resource_Id }}"
             Platform_MG_Resource_Id="${{ inputs.Platform_MG_Resource_Id }}"
             Connectivity_MG_Resource_Id="${{ inputs.Connectivity_MG_Resource_Id }}"
             Identity_MG_Resource_Id="${{ inputs.Identity_MG_Resource_Id }}"
