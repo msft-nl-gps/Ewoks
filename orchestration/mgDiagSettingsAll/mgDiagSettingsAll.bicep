@@ -4,8 +4,10 @@ metadata name = 'ALZ Bicep orchestration - Management Group Diagnostic Settings 
 metadata description = 'Orchestration module that helps enable Diagnostic Settings on the Management Group hierarchy as was defined during the deployment of the Management Group module'
 
 @sys.description('Prefix used for the management group hierarchy in the managementGroups module. Default: alz')
-@maxLength(10)
-param parTopLevelManagementGroupPrefix string = 'alz'
+param parTopLevelManagementGroupPrefix string
+
+@sys.description('Put in the Platform MG Group ObjectID')
+param platformObjectID string = '58140d5b-zdb4-4294-b605-z5e4521z55cz'
 
 @sys.description('Log Analytics Workspace Resource ID.')
 param parLogAnalyticsWorkspaceResourceId string
@@ -15,7 +17,7 @@ param parTelemetryOptOut bool = false
 
 var varMgIds = {
   intRoot: parTopLevelManagementGroupPrefix
-  platform: 'Platform'
+  platform: platformObjectID
 }
 
 // Customer Usage Attribution Id
