@@ -5,7 +5,7 @@ metadata description = 'Orchestration module that helps enable Diagnostic Settin
 
 @sys.description('Prefix used for the management group hierarchy in the managementGroups module. Default: alz')
 @maxLength(10)
-param parTopLevelManagementGroupPrefix string
+param parTopLevelManagementGroupPrefix string = 'alz'
 
 @sys.description('Array of strings to allow additional or different child Management Groups of the Landing Zones Management Group.')
 param parLandingZoneMgChildren array = []
