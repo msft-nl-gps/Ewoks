@@ -14,7 +14,8 @@ param parTelemetryOptOut bool = false
 
 var varMgIds = {
   intRoot: parTopLevelManagementGroupPrefix
-  platform: 'Platform'
+  platform: '${parTopLevelManagementGroupPrefix}-Platform'
+  platformManagement: '${parTopLevelManagementGroupPrefix}-Platform-Management'
 }
 
 // Customer Usage Attribution Id
