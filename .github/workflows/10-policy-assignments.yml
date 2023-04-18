@@ -6,7 +6,7 @@ on:
       az_powershell_min_version:
         required: true
         type: string
-      Andor_MG_Resource_Id:
+      Ewoks_MG_Resource_Id:
         required: true
         type: string
       Platform_MG_Resource_Id:
@@ -43,7 +43,7 @@ jobs:
 
     env:
       az_powershell_min_version: ${{ inputs.az_powershell_min_version }}
-      top_management_resource_group_id: ${{ inputs.Andor_MG_Resource_Id }}
+      top_management_resource_group_id: ${{ inputs.Ewoks_MG_Resource_Id }}
           
     permissions:
       id-token: write
@@ -66,12 +66,12 @@ jobs:
         with:
           scope: managementgroup
           region: westeurope
-          managementgroupid: ${{ inputs.Andor_MG_Resource_Id }}
+          managementgroupid: ${{ inputs.Ewoks_MG_Resource_Id }}
           template: modules/policy/assignment/alzDefault/alzDefaultPolicyAssignments.bicep
           parameters: >
             modules/policy/assignment/alzDefault/parameters/alzDefaultPolicyAssignments.parameters.all.json
-            parTopLevelManagementGroupPrefix="Andor"
-            Top_MG_Resource_Id="${{ inputs.Andor_MG_Resource_Id }}"
+            parTopLevelManagementGroupPrefix="Ewoks"
+            Top_MG_Resource_Id="${{ inputs.Ewoks_MG_Resource_Id }}"
             Platform_MG_Resource_Id="${{ inputs.Platform_MG_Resource_Id }}"
             Connectivity_MG_Resource_Id="${{ inputs.Connectivity_MG_Resource_Id }}"
             Identity_MG_Resource_Id="${{ inputs.Identity_MG_Resource_Id }}"
