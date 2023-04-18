@@ -2,6 +2,10 @@ name: 5 - MGs Diagnostic Settings Orchestration
 
 on:
   workflow_dispatch:
+      inputs:
+      az_powershell_min_version:
+        required: true
+        type: string
 
 jobs:
   deploy-mg-diagnostic-settings:
