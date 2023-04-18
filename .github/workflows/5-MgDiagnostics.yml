@@ -37,6 +37,6 @@ jobs:
         with:
           scope: managementgroup
           region: westeurope
-          managementgroupid: ${{ MG_EWOKS_ID }}
+          managementgroupid: ${{ variables.MG_EWOKS_ID }}
           template: ./orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bicep
           parameters: ./orchestration/mgDiagSettingsAll/parameters/mgDiagSettingsAll.parameters.json
