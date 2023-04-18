@@ -28,7 +28,7 @@ jobs:
 
       - uses: azure/arm-deploy@v1
         name: Create the Resource Group for Spoke Network
-        id: resourceSpoke
+        id: resourceGroupSpoke
         with:
           scope: subscription
           region: westeurope
