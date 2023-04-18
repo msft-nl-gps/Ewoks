@@ -18,7 +18,7 @@
         "value": true
       },
       "parVirtualWanName": {
-        "value": "ewoks-vwan-westeurope"
+        "value": "ewoks-vwan-eastus"
       },
       "parVirtualWanHubName": {
         "value": "ewoks-vhub"
@@ -30,7 +30,18 @@
         "value": []
       },
       "parAzFirewallPoliciesName": {
-        "value": "ewoks-azfwpolicy-westeurope"
+        "value": "ewoks-azfwpolicy-eastus"
+      },
+      "parVirtualWanHubs": {
+        "value": [
+          {
+            "parAzFirewallEnabled": true,
+            "parVirtualHubAddressPrefix": "10.100.0.0/23",
+            "parHubLocation": "westeurope",
+            "parHubRoutingPreference": "ASN",
+            "parVirtualRouterAutoScaleConfiguration": 2
+          }
+        ]
       }
     }
   }  
