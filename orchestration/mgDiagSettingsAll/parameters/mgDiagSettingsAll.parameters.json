@@ -5,9 +5,6 @@
     "parTopLevelManagementGroupPrefix": {
       "value": "Ewoks"
     },
-    "parTopLevelManagementGroupSuffix": {
-      "value": ""
-    },
     "parLandingZoneMgAlzDefaultsEnable": {
       "value": false
     },
