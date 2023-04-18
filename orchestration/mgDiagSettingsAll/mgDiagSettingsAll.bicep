@@ -6,6 +6,9 @@ metadata description = 'Orchestration module that helps enable Diagnostic Settin
 @sys.description('Prefix used for the management group hierarchy in the managementGroups module. Default: alz')
 param parTopLevelManagementGroupPrefix string
 
+@sys.description('Put in the Platform MG Group ObjectID')
+param platformObjectID string = '58140d5b-zdb4-4294-b605-z5e4521z55cz'
+
 @sys.description('Log Analytics Workspace Resource ID.')
 param parLogAnalyticsWorkspaceResourceId string
 
@@ -14,8 +17,7 @@ param parTelemetryOptOut bool = false
 
 var varMgIds = {
   intRoot: parTopLevelManagementGroupPrefix
-  platform: '${parTopLevelManagementGroupPrefix}-Platform'
-  platformManagement: '${parTopLevelManagementGroupPrefix}-Platform-Management'
+  platform: platformObjectID
 }
 
 // Customer Usage Attribution Id
