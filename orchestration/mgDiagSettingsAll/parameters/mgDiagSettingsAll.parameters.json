@@ -3,13 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "parTopLevelManagementGroupPrefix": {
-      "value": ""
-    },
-    "parTopLevelManagementGroupSuffix": {
-      "value": ""
+      "value": "Ewoks"
     },
     "parLandingZoneMgAlzDefaultsEnable": {
-      "value": true
+      "value": false
     },
     "parLandingZoneMgConfidentialEnable": {
       "value": false
