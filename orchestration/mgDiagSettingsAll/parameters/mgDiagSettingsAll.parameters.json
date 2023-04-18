@@ -5,20 +5,8 @@
     "parTopLevelManagementGroupPrefix": {
       "value": "Ewoks"
     },
-    "parLandingZoneMgAlzDefaultsEnable": {
-      "value": false
-    },
-    "parLandingZoneMgConfidentialEnable": {
-      "value": false
-    },
     "parLogAnalyticsWorkspaceResourceId": {
       "value": "/subscriptions/f546d538-01b7-4570-88ba-fc51cc6b61ac/resourceGroups/ewoks-mgt-p-log-01/providers/Microsoft.OperationalInsights/workspaces/ewoks-log-analytics"
-    },
-    "parLandingZoneMgChildren": {
-      "value": []
-    },
-    "parTelemetryOptOut": {
-      "value": false
     }
   }
 }
