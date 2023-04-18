@@ -18,16 +18,10 @@
         "value": true
       },
       "parVirtualWanName": {
-        "value": "ewoks-vwan-eastus"
+        "value": "ewoks-vwan-westeurope"
       },
       "parVirtualWanHubName": {
         "value": "ewoks-vhub"
-      },
-      "parVpnGatewayName": {
-        "value": "ewoks-vpngw"
-      },
-      "parExpressRouteGatewayName": {
-        "value": "ewoks-ergw"
       },
       "parAzFirewallName": {
         "value": "ewoks-fw"
@@ -36,25 +30,7 @@
         "value": []
       },
       "parAzFirewallPoliciesName": {
-        "value": "ewoks-azfwpolicy-eastus"
-      },
-      "parVirtualWanHubs": {
-        "value": [
-          {
-            "parVpnGatewayEnabled": true,
-            "parExpressRouteGatewayEnabled": true,
-            "parAzFirewallEnabled": true,
-            "parVirtualHubAddressPrefix": "10.100.0.0/23",
-            "parHubLocation": "eastus",
-            "parHubRoutingPreference": "ExpressRoute",
-            "parVirtualRouterAutoScaleConfiguration": 2
-          }
-        ]
-      },
-      "parTags": {
-        "value": {
-          "Environment": "Live"
-        }
+        "value": "ewoks-azfwpolicy-westeurope"
       }
     }
   }  
