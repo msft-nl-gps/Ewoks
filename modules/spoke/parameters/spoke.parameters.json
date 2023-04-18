@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "parLocation": {
+        "value": "westeurope"
+      },
+      "parDisableBgpRoutePropagation": {
+        "value": false
+      },
+      "parSpokeNetworkAddressPrefix": {
+        "value": "10.102.0.0/16"
+      },
+      "parSpokeNetworkName": {
+        "value": "vnet-spoke"
+      },
+      "parDnsServerIps": {
+        "value": ["1.1.1.1", "8.8.8.8"]
+      },
+      "parNextHopIpAddress": {
+        "value": ""
+      },
+      "parSpokeToHubRouteTableName": {
+        "value": "rtb-spoke-to-hub"
+      },
+      "parTelemetryOptOut": {
+        "value": false
+      }
+    }
+  }  

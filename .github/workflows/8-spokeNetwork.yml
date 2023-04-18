@@ -1,0 +1,47 @@
+name: 8 - Spoke Network
+
+on:
+  workflow_dispatch:
+    inputs:
+      Subscription_Id:
+        required: true
+        type: string
+
+jobs:
+  deploy-spoke-network:
+    runs-on: [self-hosted, linux]
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          subscription-id: ${{ inputs.Subscription_Id }}
+          enable-AzPSSession: true
+
+      - uses: azure/arm-deploy@v1
+        name: Create the Resource Group for Spoke Network
+        id: resourceSpoke
+        with:
+          scope: subscription
+          region: westeurope
+          subscriptionId: ${{ inputs.Subscription_Id }}
+          template: ./modules/spoke/resourceGroup.bicep
+          parameters: ./modules/spoke/parameters/resourceGroup.parameters.json
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy Spoke Network
+        id: deploySpokeNetwork
+        with:
+          scope: resourcegroup
+          region: westeurope
+          resourcegroupname: ${{ steps.resourceGroupSpoke.outputs.outResourceGroupName }}
+          template: ./modules/spoke/spoke.bicep
+          parameters: ./modules/spoke/parameters/spoke.parameters.json
