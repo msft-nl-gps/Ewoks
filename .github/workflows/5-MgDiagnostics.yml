@@ -2,10 +2,6 @@ name: 5 - MGs Diagnostic Settings Orchestration
 
 on:
   workflow_dispatch:
-    inputs:
-      Ewoks_MG_Resource_Id:
-        required: true
-        type: string
 
 jobs:
   deploy-mg-diagnostic-settings:
