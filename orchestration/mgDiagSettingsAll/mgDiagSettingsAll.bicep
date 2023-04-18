@@ -5,7 +5,7 @@ metadata description = 'Orchestration module that helps enable Diagnostic Settin
 
 @sys.description('Prefix used for the management group hierarchy in the managementGroups module. Default: alz')
 @maxLength(10)
-param parTopLevelManagementGroupPrefix string = 'alz'
+param parTopLevelManagementGroupPrefix string
 
 @sys.description('Log Analytics Workspace Resource ID.')
 param parLogAnalyticsWorkspaceResourceId string
