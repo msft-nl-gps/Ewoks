@@ -36,7 +36,7 @@
         "value": [
           {
             "parAzFirewallEnabled": true,
-            "parVirtualHubAddressPrefix": "10.100.0.0/23",
+            "parVirtualHubAddressPrefix": "10.101.0.0/23",
             "parHubLocation": "westeurope",
             "parHubRoutingPreference": "ASN",
             "parVirtualRouterAutoScaleConfiguration": 2
