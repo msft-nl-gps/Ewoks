@@ -27,14 +27,8 @@ param parLandingZoneMgConfidentialEnable bool = false
 param parTelemetryOptOut bool = false
 
 var varMgIds = {
-  intRoot: '${parTopLevelManagementGroupPrefix}${parTopLevelManagementGroupSuffix}'
-  platform: '${parTopLevelManagementGroupPrefix}Platform${parTopLevelManagementGroupSuffix}'
-  platformManagement: '${parTopLevelManagementGroupPrefix}Platform-Management${parTopLevelManagementGroupSuffix}'
-  platformConnectivity: '${parTopLevelManagementGroupPrefix}Platform-Connectivity${parTopLevelManagementGroupSuffix}'
-  platformIdentity: '${parTopLevelManagementGroupPrefix}Platform-Identity${parTopLevelManagementGroupSuffix}'
-  landingZones: '${parTopLevelManagementGroupPrefix}Landing Zones${parTopLevelManagementGroupSuffix}'
-  decommissioned: '${parTopLevelManagementGroupPrefix}Decommissioned${parTopLevelManagementGroupSuffix}'
-  sandbox: '${parTopLevelManagementGroupPrefix}Sandbox${parTopLevelManagementGroupSuffix}'
+  intRoot: 'Ewoks'
+  platform: 'Platform'
 }
 
 // Used if parLandingZoneMgAlzDefaultsEnable == true
