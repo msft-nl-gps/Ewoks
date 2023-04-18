@@ -3,9 +3,6 @@ name: 10 - Process Policy Definitions and Assignments
 on:
   workflow_dispatch:
     inputs:
-      az_powershell_min_version:
-        required: true
-        type: string
       Ewoks_MG_Resource_Id:
         required: true
         type: string
