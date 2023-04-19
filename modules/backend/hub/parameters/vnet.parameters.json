@@ -9,14 +9,14 @@
         "value": false
       },
       "parSpokeNetworkAddressPrefix": {
-        "value": "10.200.1.0/24"
+        "value": "10.30.0.0/16"
       },
       "vnetSubnets": {
         "value": [
           {
             "name": "hub-01",
             "properties": {
-              "addressPrefix": "10.200.1.0/27",
+              "addressPrefix": "10.30.1.0/24",
               "networkSecurityGroup": {
                 "id": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-be-p-hub-01/providers/Microsoft.Network/networkSecurityGroups/ewoksbephub01nsg01"
               },
@@ -34,7 +34,7 @@
           {
             "name": "app-01",
             "properties": {
-              "addressPrefix": "10.200.1.32/28",
+              "addressPrefix": "10.30.1.0/24",
               "networkSecurityGroup": {
                 "id": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-be-p-hub-01/providers/Microsoft.Network/networkSecurityGroups/ewoksbephub01nsg01"
               },
