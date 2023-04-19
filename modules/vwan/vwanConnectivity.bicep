@@ -24,7 +24,7 @@ param parAzFirewallDnsProxyEnabled bool = true
 param parVirtualWanName string = '${parCompanyPrefix}-vwan-${parLocation}'
 
 @sys.description('Prefix Used for Virtual WAN Hub.')
-param parVirtualWanHubName string = '${parCompanyPrefix}-vhub-${parLocation}'
+param parVirtualWanHubName string = '${parCompanyPrefix}-vhub'
 
 @sys.description('''Array Used for multiple Virtual WAN Hubs deployment. Each object in the array represents an individual Virtual WAN Hub configuration. Add/remove additional objects in the array to meet the number of Virtual WAN Hubs required.
 
@@ -38,16 +38,24 @@ param parVirtualWanHubName string = '${parCompanyPrefix}-vhub-${parLocation}'
 
 ''')
 param parVirtualWanHubs array = [ {
+    parVpnGatewayEnabled: true
+    parExpressRouteGatewayEnabled: true
     parAzFirewallEnabled: true
     parVirtualHubAddressPrefix: '10.100.0.0/23'
-    parHubLocation: 'westeurope'
-    parHubRoutingPreference: 'ExpressRoute'
+    parHubLocation: 'eastus'
+    parHubRoutingPreference: 'ExpressRoute' //allowed values are 'ASN','VpnGateway','ExpressRoute'.
     parVirtualRouterAutoScaleConfiguration: 2 //minimum capacity should be between 2 to 50
   }
 ]
 
+@sys.description('Prefix Used for VPN Gateway.')
+param parVpnGatewayName string = '${parCompanyPrefix}-vpngw'
+
+@sys.description('Prefix Used for ExpressRoute Gateway.')
+param parExpressRouteGatewayName string = '${parCompanyPrefix}-ergw'
+
 @sys.description('Azure Firewall Name.')
-param parAzFirewallName string = '${parCompanyPrefix}-fw-${parLocation}'
+param parAzFirewallName string = '${parCompanyPrefix}-fw'
 
 @allowed([
   '1'
@@ -59,6 +67,18 @@ param parAzFirewallAvailabilityZones array = []
 
 @sys.description('Azure Firewall Policies Name.')
 param parAzFirewallPoliciesName string = '${parCompanyPrefix}-azfwpolicy-${parLocation}'
+
+@sys.description('The scale unit for this VPN Gateway.')
+param parVpnGatewayScaleUnit int = 1
+
+@sys.description('The scale unit for this ExpressRoute Gateway.')
+param parExpressRouteGatewayScaleUnit int = 1
+
+@sys.description('Switch to enable/disable DDoS Network Protection deployment.')
+param parDdosEnabled bool = true
+
+@sys.description('DDoS Plan Name.')
+param parDdosPlanName string = '${parCompanyPrefix}-ddos-plan'
 
 @sys.description('Switch to enable/disable Private DNS Zones deployment.')
 param parPrivateDnsZonesEnabled bool = true
@@ -138,11 +158,18 @@ param parPrivateDnsZones array = [
 
 @sys.description('Resource ID of VNet for Private DNS Zone VNet Links')
 param parVirtualNetworkIdToLink string = ''
+
 @sys.description('Tags you would like to be applied to all resources in this module.')
 param parTags object = {}
 
+@sys.description('Set Parameter to true to Opt-out of deployment telemetry')
+param parTelemetryOptOut bool = false
+
+// Customer Usage Attribution Id
+var varCuaid = '7f94f23b-7a59-4a5c-9a8d-2a253a566f61'
+
 // Virtual WAN resource
-resource resVwan 'Microsoft.Network/virtualWans@2021-08-01' = {
+resource resVwan 'Microsoft.Network/virtualWans@2022-01-01' = {
   name: parVirtualWanName
   location: parLocation
   tags: parTags
@@ -192,6 +219,41 @@ resource resVhubRouteTable 'Microsoft.Network/virtualHubs/hubRouteTables@2022-01
   }
 }]
 
+resource resVpnGateway 'Microsoft.Network/vpnGateways@2021-05-01' = [for (hub, i) in parVirtualWanHubs: if ((parVirtualHubEnabled) && (hub.parVpnGatewayEnabled)) {
+  dependsOn: resVhub
+  name: '${parVpnGatewayName}-${hub.parHubLocation}'
+  location: hub.parHubLocation
+  tags: parTags
+  properties: {
+    bgpSettings: {
+      asn: 65515
+      bgpPeeringAddress: ''
+      peerWeight: 5
+    }
+    virtualHub: {
+      id: resVhub[i].id
+    }
+    vpnGatewayScaleUnit: parVpnGatewayScaleUnit
+  }
+}]
+
+resource resErGateway 'Microsoft.Network/expressRouteGateways@2021-05-01' = [for (hub, i) in parVirtualWanHubs: if ((parVirtualHubEnabled) && (hub.parExpressRouteGatewayEnabled)) {
+  dependsOn: resVhub
+  name: '${parExpressRouteGatewayName}-${hub.parHubLocation}'
+  location: hub.parHubLocation
+  tags: parTags
+  properties: {
+    virtualHub: {
+      id: resVhub[i].id
+    }
+    autoScaleConfiguration: {
+      bounds: {
+        min: parExpressRouteGatewayScaleUnit
+      }
+    }
+  }
+}]
+
 resource resFirewallPolicies 'Microsoft.Network/firewallPolicies@2022-05-01' = if (parVirtualHubEnabled && parVirtualWanHubs[0].parAzFirewallEnabled) {
   name: parAzFirewallPoliciesName
   location: parLocation
@@ -210,7 +272,7 @@ resource resAzureFirewall 'Microsoft.Network/azureFirewalls@2022-05-01' = [for (
   name: '${parAzFirewallName}-${hub.parHubLocation}'
   location: hub.parHubLocation
   tags: parTags
-  zones: (!empty(parAzFirewallAvailabilityZones) ? parAzFirewallAvailabilityZones : null)
+  zones: (!empty(parAzFirewallAvailabilityZones) ? parAzFirewallAvailabilityZones : json('null'))
   properties: {
     hubIPAddresses: {
       publicIPs: {
@@ -230,6 +292,13 @@ resource resAzureFirewall 'Microsoft.Network/azureFirewalls@2022-05-01' = [for (
   }
 }]
 
+// DDoS plan is deployed even though not supported to attach to Virtual WAN today as per https://docs.microsoft.com/azure/firewall-manager/overview#known-issues - However, it can still be linked via policy to spoke VNets etc.
+resource resDdosProtectionPlan 'Microsoft.Network/ddosProtectionPlans@2021-08-01' = if (parDdosEnabled) {
+  name: parDdosPlanName
+  location: parLocation
+  tags: parTags
+}
+
 // Private DNS Zones cannot be linked to the Virtual WAN Hub today however, they can be linked to spokes as they are normal VNets as per https://docs.microsoft.com/azure/virtual-wan/howto-private-link
 module modPrivateDnsZones '../privateDnsZones/privateDnsZones.bicep' = if (parPrivateDnsZonesEnabled) {
   name: 'deploy-Private-DNS-Zones'
@@ -241,6 +310,14 @@ module modPrivateDnsZones '../privateDnsZones/privateDnsZones.bicep' = if (parPr
     parPrivateDnsZones: parPrivateDnsZones
   }
 }
+
+
+// Optional Deployment for Customer Usage Attribution
+module modCustomerUsageAttribution '../../CRML/customerUsageAttribution/cuaIdResourceGroup.bicep' = if (!parTelemetryOptOut) {
+  name: 'pid-${varCuaid}-${uniqueString(parLocation)}'
+  params: {}
+}
+
 
 // Output Virtual WAN name and ID
 output outVirtualWanName string = resVwan.name
@@ -255,6 +332,8 @@ output outVirtualHubName array = [ for (hub, i) in parVirtualWanHubs: {
 output outVirtualHubId array = [ for (hub, i) in parVirtualWanHubs: {
   virtualhubid: resVhub[i].id
 }]
+// Output DDoS Plan ID
+output outDdosPlanResourceId string = resDdosProtectionPlan.id
+
 // Output Private DNS Zones
 output outPrivateDnsZones array = (parPrivateDnsZonesEnabled ? modPrivateDnsZones.outputs.outPrivateDnsZones : [])
-
