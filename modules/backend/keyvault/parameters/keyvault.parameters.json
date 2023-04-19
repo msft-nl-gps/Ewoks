@@ -35,40 +35,5 @@
       "kvtCustomerId": {
           "type": "string"
       }
-  },
-  "variables": {
-  },
-  "resources": [
-      {
-          "name": "[concat(replace(tolower(resourceGroup().name), '-', ''), tolower(parameters('kvtCustomerId')) , 'kvt', padLeft(copyIndex(1), 2,'0'))]",
-          "type": "Microsoft.KeyVault/vaults",
-          "apiVersion": "2018-02-14",
-          "location": "[resourceGroup().location]",
-          "copy": {
-              "name": "copyKeyVault",
-              "count": "[parameters('kvtCount')]",
-              "mode": "Serial"
-          },
-          "properties": {
-            "tenantId": "[parameters('kvtTenantId')]",
-            "sku": {
-              "family": "A",
-              "name": "[parameters('kvtSkuName')]"
-            },
-            "accessPolicies": "[parameters('kvtAccessPolicies')]",
-            "enabledForDeployment": "[parameters('kvtEnabledForDeployment')]",
-            "enabledForDiskEncryption": "[parameters('kvtEnabledForDiskEncryption')]",
-            "enabledForTemplateDeployment": "[parameters('kvtEnabledForTemplateDeployment')]"
-          }
-      }
-  ],
-  "outputs": {
-      "kvtResourceId": {
-          "type": "array",
-          "copy": {
-              "count": "[parameters('kvtCount')]",
-              "input": "[resourceId('Microsoft.KeyVault/vaults', concat(replace(tolower(resourceGroup().name), '-', ''), tolower(parameters('kvtCustomerId')) , 'kvt', padLeft(copyIndex(1), 2,'0')))]"
-          }
-      }
-  }
+    }
 }
