@@ -1,4 +1,4 @@
-name: 31 - Application Gateway Hub
+name: C31 - Application Gateway Hub
 
 on:
   workflow_dispatch:
