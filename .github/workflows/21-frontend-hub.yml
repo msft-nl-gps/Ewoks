@@ -37,6 +37,16 @@ jobs:
           parameters: ./modules/frontend/hub/parameters/resourceGroup.parameters.json
 
       - uses: azure/arm-deploy@v1 
+        name: Deploy Frontend VNET NSG
+        id: deployFrontendHubVnetNsg
+        with:
+          scope: resourcegroup
+          region: westeurope
+          resourcegroupname: ${{ steps.resourceGroupFrontendHub.outputs.outResourceGroupName }}
+          template: ./modules/frontend/hub/nsg.bicep
+          parameters: ./modules/frontend/hub/parameters/nsg.parameters.json
+
+      - uses: azure/arm-deploy@v1 
         name: Deploy Frontend Hub VNET
         id: deployFrontendHubVnet
         with:
