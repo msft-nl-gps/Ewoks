@@ -52,5 +52,5 @@ jobs:
         with:
           scope: subscription
           region: westeurope
-          template: ./modules/hub/frontend/vnetPeeringVwan.bicep
-          parameters: ./modules/hub/frontend/parameters/vnetPeeringVwan.parameters.json          
+          template: ./modules/frontend/hub/vnetPeeringVwan.bicep
+          parameters: ./modules/frontend/hub/parameters/vnetPeeringVwan.parameters.json          
