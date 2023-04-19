@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "kvtTenantId": {
+          "type": "string"
+      },
+      "kvtSkuName": {
+          "type": "string",
+          "allowedValues": [
+              "standard",
+              "premium"
+          ],
+          "defaultValue": "standard"
+      },
+      "kvtAccessPolicies": {
+          "type": "array"
+      },
+      "kvtEnabledForDeployment": {
+          "type": "bool",
+          "defaultValue": true
+      },
+      "kvtEnabledForDiskEncryption": {
+          "type": "bool",
+          "defaultValue": true
+      },
+      "kvtEnabledForTemplateDeployment": {
+          "type": "bool",
+          "defaultValue": true
+      },
+      "kvtCount": {
+          "type": "int",
+          "defaultValue": 1
+      },
+      "kvtCustomerId": {
+          "type": "string"
+      }
+  },
+  "variables": {
+  },
+  "resources": [
+      {
+          "name": "[concat(replace(tolower(resourceGroup().name), '-', ''), tolower(parameters('kvtCustomerId')) , 'kvt', padLeft(copyIndex(1), 2,'0'))]",
+          "type": "Microsoft.KeyVault/vaults",
+          "apiVersion": "2018-02-14",
+          "location": "[resourceGroup().location]",
+          "copy": {
+              "name": "copyKeyVault",
+              "count": "[parameters('kvtCount')]",
+              "mode": "Serial"
+          },
+          "properties": {
+            "tenantId": "[parameters('kvtTenantId')]",
+            "sku": {
+              "family": "A",
+              "name": "[parameters('kvtSkuName')]"
+            },
+            "accessPolicies": "[parameters('kvtAccessPolicies')]",
+            "enabledForDeployment": "[parameters('kvtEnabledForDeployment')]",
+            "enabledForDiskEncryption": "[parameters('kvtEnabledForDiskEncryption')]",
+            "enabledForTemplateDeployment": "[parameters('kvtEnabledForTemplateDeployment')]"
+          }
+      }
+  ],
+  "outputs": {
+      "kvtResourceId": {
+          "type": "array",
+          "copy": {
+              "count": "[parameters('kvtCount')]",
+              "input": "[resourceId('Microsoft.KeyVault/vaults', concat(replace(tolower(resourceGroup().name), '-', ''), tolower(parameters('kvtCustomerId')) , 'kvt', padLeft(copyIndex(1), 2,'0')))]"
+          }
+      }
+  }
+}
