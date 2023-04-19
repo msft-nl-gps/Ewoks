@@ -43,7 +43,7 @@ jobs:
           scope: resourcegroup
           region: westeurope
           resourcegroupname: ${{ steps.resourceGroupBackendHub.outputs.outResourceGroupName }}
-          template: ./modules/hub/backend/vnet.bicep
+          template: ./modules/backend/hub/vnet.bicep
           parameters: ./modules/backend/hub/parameters/vnet.parameters.json
 
       - uses: azure/arm-deploy@v1 
@@ -52,5 +52,5 @@ jobs:
         with:
           scope: subscription
           region: westeurope
-          template: ./modules/hub/backend/vnetPeeringVwan.bicep
-          parameters: ./modules/hub/backend/parameters/vnetPeeringVwan.parameters.json
+          template: ./modules/backend/hub/vnetPeeringVwan.bicep
+          parameters: ./modules/backend/hub/parameters/vnetPeeringVwan.parameters.json
