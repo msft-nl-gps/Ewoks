@@ -1,50 +1,38 @@
-param kvtTenantId string
+@description('Specifies the name of the key vault.')
+param keyVaultName string = 'kv${uniqueString(resourceGroup().id)}'
 
-param kvtDefaultAction string = 'Deny'
+@description('Specifies the SKU to use for the key vault.')
+param keyVaultSku object = {
+  name: 'standard'
+  family: 'A'
+}
 
-@allowed([
-  'standard'
-  'premium'
-])
-param kvtSkuName string = 'standard'
-param kvtAccessPolicies array
-param kvtEnabledForDeployment bool = true
-param kvtEnabledForDiskEncryption bool = true
-param kvtEnabledForTemplateDeployment bool = true
-param kvtCount int = 1
-param kvtCustomerId string
+@description('Specifies the Azure location where the resources should be created.')
+param location string = resourceGroup().location
 
-@description('Option to add a workload name to create unique keyvault name')
-param kvtWorkload string = 'none'
-@description('The location of the resource')
-param kvtLocation string = resourceGroup().location
+var managedIdentityName = 'manid-kvt-admin'
 
-var kvtName = (kvtWorkload == 'none') ? '${replace(toLower(resourceGroup().name), '-', '')}${toLower(kvtCustomerId)}kvt' : '${replace(toLower(resourceGroup().name), '-', '')}${toLower(kvtWorkload)}${toLower(kvtCustomerId)}kvt'
-
-resource resKeyvault 'Microsoft.KeyVault/vaults@2021-06-01-preview' = [for i in range(0, kvtCount): {
-  name: '${kvtName}${padLeft((i + 1), 2, '0')}'
-  location: kvtLocation
+resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
+  name: keyVaultName
+  location: location
   properties: {
-    tenantId: kvtTenantId
-    sku: {
-      family: 'A'
-      name: kvtSkuName
-    }
-    networkAcls: {
-      bypass: 'AzureServices'
-      defaultAction: kvtDefaultAction
-      ipRules: [
-        {
-          value: '20.123.167.188/32'
-        }
-      ]
-      virtualNetworkRules: []
-    }
-    accessPolicies: kvtAccessPolicies
-    enabledForDeployment: kvtEnabledForDeployment
-    enabledForDiskEncryption: kvtEnabledForDiskEncryption
-    enabledForTemplateDeployment: kvtEnabledForTemplateDeployment
+    enableRbacAuthorization: true
+    tenantId: tenant().tenantId
+    sku: keyVaultSku
   }
-}]
+}
 
-output kvtResourceId array = [for i in range(0, kvtCount): resourceId('Microsoft.KeyVault/vaults', '${kvtName}${padLeft((i + 1), 2, '0')}')]
+resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
+  name: managedIdentityName
+  location: location
+}
+
+module role_assignment './nested_role_assignment.bicep' = {
+  name: 'role-assignment'
+  params: {
+    keyVaultName: keyVaultName
+    roleAssignmentName: guid(keyVault.id, managedIdentity.properties.principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '00482a5a-887f-4fb3-b363-3b7fe8e74483'))
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '00482a5a-887f-4fb3-b363-3b7fe8e74483')
+    principalId: managedIdentity.properties.principalId
+  }
+}
