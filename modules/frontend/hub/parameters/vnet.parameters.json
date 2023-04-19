@@ -51,7 +51,7 @@
         ]
       },
       "parSpokeNetworkName": {
-        "value": "vnet-frontend"
+        "value": "vnet-front"
       },
       "parDnsServerIps": {
         "value": ["1.1.1.1", "8.8.8.8"]
