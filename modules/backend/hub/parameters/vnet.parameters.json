@@ -17,7 +17,9 @@
             "name": "hub-01",
             "properties": {
               "addressPrefix": "10.200.1.0/27",
-              "networkSecurityGroup": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-be-p-hub-01/providers/Microsoft.Network/networkSecurityGroups/ewoksbephub01nsg01",
+              "networkSecurityGroup": {
+                "id": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-be-p-hub-01/providers/Microsoft.Network/networkSecurityGroups/ewoksbephub01nsg01"
+              },
               "serviceEndpoints": [
                 {
                   "service": "Microsoft.KeyVault",
@@ -33,7 +35,9 @@
             "name": "app-01",
             "properties": {
               "addressPrefix": "10.200.1.32/28",
-              "networkSecurityGroup": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-be-p-hub-01/providers/Microsoft.Network/networkSecurityGroups/nsg-backend",
+              "networkSecurityGroup": {
+                "id": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-be-p-hub-01/providers/Microsoft.Network/networkSecurityGroups/ewoksbephub01nsg01"
+              },
               "serviceEndpoints": [
                 {
                   "service": "Microsoft.KeyVault",
