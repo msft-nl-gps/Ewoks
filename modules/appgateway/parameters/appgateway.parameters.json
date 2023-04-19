@@ -6,19 +6,19 @@
         "value": "WAF_v2"
       },
       "vnetname": {
-        "value": ""
+        "value": "vnet-frontend"
       },
       "subnetName": {
-        "value": ""
+        "value": "app-01"
       },
       "healthProbeHostName": {
         "value": "api.ad.ewoks.nl"
       },
       "listenerHostName": {
-        "value": ""
+        "value": "api.ad.ewoks.nl"
       },
       "backendPoolHostName": {
-        "value": ""
+        "value": "api.ad.ewoks.nl"
       }
     }
 }
