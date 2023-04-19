@@ -1,4 +1,4 @@
-name: B21 - Frontend Hub
+name: 21 - Frontend Hub
 
 on:
   workflow_dispatch:

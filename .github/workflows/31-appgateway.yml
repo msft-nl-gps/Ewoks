@@ -1,4 +1,4 @@
-name: A11 - Backend Hub
+name: 31 - Application Gateway Hub
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  deploy-backend-hub:
+  deploy-appgw-hub:
     runs-on: [self-hosted, linux]
     
     permissions:
@@ -27,30 +27,30 @@ jobs:
           enable-AzPSSession: true
 
       - uses: azure/arm-deploy@v1
-        name: Create the Resource Group for Backend Hub
-        id: resourceGroupBackendHub
+        name: Create the Resource Group for appgw Hub
+        id: resourceGroupAppGwHub
         with:
           scope: subscription
           region: westeurope
           subscriptionId: ${{ inputs.Subscription_Id }}
-          template: ./modules/backend/hub/resourceGroup.bicep
-          parameters: ./modules/backend/hub/parameters/resourceGroup.parameters.json
+          template: ./modules/appgw/hub/resourceGroup.bicep
+          parameters: ./modules/appgw/hub/parameters/resourceGroup.parameters.json
 
       - uses: azure/arm-deploy@v1 
-        name: Deploy Backend Hub VNET
-        id: deployBackendHubVnet
+        name: Deploy App Gw Hub VNET
+        id: deployAppGwHubVnet
         with:
           scope: resourcegroup
           region: westeurope
-          resourcegroupname: ${{ steps.resourceGroupBackendHub.outputs.outResourceGroupName }}
-          template: ./modules/backend/hub/vnet.bicep
-          parameters: ./modules/backend/hub/parameters/vnet.parameters.json
+          resourcegroupname: ${{ steps.resourceGroupAppGwHub.outputs.outResourceGroupName }}
+          template: ./modules/appgw/hub/vnet.bicep
+          parameters: ./modules/appgw/hub/parameters/vnet.parameters.json
 
       - uses: azure/arm-deploy@v1 
-        name: Deploy Vnet Peering Vwan Backend
-        id: deployVnetPeeringVwanBackend
+        name: Deploy Vnet Peering App Gw Hub
+        id: deployVnetPeeringVwanAppGw
         with:
           scope: subscription
           region: westeurope
-          template: ./modules/backend/hub/vnetPeeringVwan.bicep
-          parameters: ./modules/backend/hub/parameters/vnetPeeringVwan.parameters.json
+          template: ./modules/appgw/hub/vnetPeeringVwan.bicep
+          parameters: ./modules/appgw/hub/parameters/vnetPeeringVwan.parameters.json          
