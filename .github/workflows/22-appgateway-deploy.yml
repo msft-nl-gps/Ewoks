@@ -33,8 +33,8 @@ jobs:
           scope: subscription
           region: westeurope
           subscriptionId: ${{ inputs.Subscription_Id }}
-          template: ./modules/appgw/resourceGroup.bicep
-          parameters: ./modules/appgw/parameters/resourceGroup.parameters.json
+          template: ./modules/frontend/appgw/resourceGroup.bicep
+          parameters: ./modules/frontend/appgw/parameters/resourceGroup.parameters.json
 
       - uses: azure/arm-deploy@v1 
         name: Deploy App Gw
@@ -43,5 +43,5 @@ jobs:
           scope: resourcegroup
           region: westeurope
           resourcegroupname: ${{ steps.resourceGroupAppgw.outputs.outResourceGroupName }}
-          template: ./modules/appgw/vnet.bicep
-          parameters: ./modules/appgw/parameters/appgateway.parameters.json        
+          template: ./modules/frontend/appgw/appgateway.bicep
+          parameters: ./modules/frontend/appgw/parameters/appgateway.parameters.json        
