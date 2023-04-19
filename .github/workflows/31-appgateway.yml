@@ -1,0 +1,56 @@
+name: 31 - Application Gateway Hub
+
+on:
+  workflow_dispatch:
+    inputs:
+      Subscription_Id:
+        required: true
+        type: string
+
+jobs:
+  deploy-appgw-hub:
+    runs-on: [self-hosted, linux]
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          subscription-id: ${{ inputs.Subscription_Id }}
+          enable-AzPSSession: true
+
+      - uses: azure/arm-deploy@v1
+        name: Create the Resource Group for appgw Hub
+        id: resourceGroupAppGwHub
+        with:
+          scope: subscription
+          region: westeurope
+          subscriptionId: ${{ inputs.Subscription_Id }}
+          template: ./modules/appgw/hub/resourceGroup.bicep
+          parameters: ./modules/appgw/hub/parameters/resourceGroup.parameters.json
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy App Gw Hub VNET
+        id: deployAppGwHubVnet
+        with:
+          scope: resourcegroup
+          region: westeurope
+          resourcegroupname: ${{ steps.resourceGroupAppGwHub.outputs.outResourceGroupName }}
+          template: ./modules/appgw/hub/vnet.bicep
+          parameters: ./modules/appgw/hub/parameters/vnet.parameters.json
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy Vnet Peering App Gw Hub
+        id: deployVnetPeeringVwanAppGw
+        with:
+          scope: subscription
+          region: westeurope
+          template: ./modules/appgw/hub/vnetPeeringVwan.bicep
+          parameters: ./modules/appgw/hub/parameters/vnetPeeringVwan.parameters.json          
