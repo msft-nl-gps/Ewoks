@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "parVirtualWanHubResourceId": {
+        "value": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-con-p-vwan-01/providers/Microsoft.Network/virtualHubs/ewoks-vhub"
+      },
+      "parRemoteVirtualNetworkResourceId": {
+        "value": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-be-p-hub-01/providers/Microsoft.Network/virtualNetworks/vnet-backend"
+      }
+    }
+}

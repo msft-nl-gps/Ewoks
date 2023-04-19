@@ -45,3 +45,12 @@ jobs:
           resourcegroupname: ${{ steps.resourceGroupFrontendHub.outputs.outResourceGroupName }}
           template: ./modules/frontend/hub/vnet.bicep
           parameters: ./modules/frontend/hub/parameters/vnet.parameters.json
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy Vnet Peering Vwan Backend
+        id: deployVnetPeeringVwanBackend
+        with:
+          scope: subscription
+          region: westeurope
+          template: ./modules/hub/frontend/vnetPeeringVwan.bicep
+          parameters: ./modules/hub/frontend/parameters/vnetPeeringVwan.parameters.json          
