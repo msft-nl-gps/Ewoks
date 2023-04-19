@@ -38,7 +38,7 @@ jobs:
 
       - uses: azure/arm-deploy@v1 
         name: Deploy App Service Plan
-        id: deployFunc
+        id: deployAsp
         with:
           scope: resourcegroup
           region: westeurope
@@ -53,6 +53,6 @@ jobs:
           scope: resourcegroup
           region: westeurope
           resourcegroupname: ${{ steps.resourceGroupFunc.outputs.outResourceGroupName }}
-          aspServerFarmResourceId: ${{ steps.deployFunc.outputs.aspServerFarmResourceId }}
+          aspServerFarmResourceId: ${{ steps.deployAsp.outputs.aspServerFarmResourceId }}
           template: ./modules/backend/func/function.bicep
           parameters: ./modules/backend/func/function.parameters.json        
