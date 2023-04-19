@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  deploy-appgw-hub:
+  deploy-backend-keyvault:
     runs-on: [self-hosted, linux]
     
     permissions:
