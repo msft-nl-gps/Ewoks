@@ -5,9 +5,6 @@
         "nsgIndex": {
             "value": 1
         },
-        "nsgName": {
-            "value": "nsg-backend"
-        },
         "nsgLocation": {
             "value": "westeurope"
         },
