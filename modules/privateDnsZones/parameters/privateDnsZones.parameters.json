@@ -78,7 +78,7 @@
         }
       },
       "parVirtualNetworkIdToLink": {
-        "value": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/xxxxxxxxxxx/providers/Microsoft.Network/virtualNetworks/xxxxxxxxxxx"
+        "value": "/subscriptions/613cefef-fdb2-4aa6-8225-2c3fac3dec2f/resourceGroups/ewoks-spoke-p-nw-01/providers/Microsoft.Network/virtualNetworks/vnet-spoke"
       },
       "parTelemetryOptOut": {
         "value": false
