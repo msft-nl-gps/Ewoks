@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "parLocation": {
+        "value": "westeurope"
+      },
+      "parDisableBgpRoutePropagation": {
+        "value": false
+      },
+      "parSpokeNetworkAddressPrefix": {
+        "value": "10.200.1.0/24"
+      },
+      "vnetSubnets": {
+        "value": [
+          {
+            "name": "hub-01",
+            "properties": {
+              "addressPrefix": "10.200.1.0/27",
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.KeyVault",
+                  "locations": [
+                    "*"
+                  ]
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Disabled"
+            }
+          },
+          {
+            "name": "app-01",
+            "properties": {
+              "addressPrefix": "10.200.1.32/28",
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.KeyVault",
+                  "locations": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "parSpokeNetworkName": {
+        "value": "vnet-backend"
+      },
+      "parDnsServerIps": {
+        "value": ["1.1.1.1", "8.8.8.8"]
+      },
+      "parNextHopIpAddress": {
+        "value": ""
+      },
+      "parSpokeToHubRouteTableName": {
+        "value": "rtb-spoke-to-hub"
+      }
+    }
+  }  
