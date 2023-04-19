@@ -1,0 +1,47 @@
+name: 11 - Backend Hub
+
+on:
+  workflow_dispatch:
+    inputs:
+      Subscription_Id:
+        required: true
+        type: string
+
+jobs:
+  deploy-backend-hub:
+    runs-on: [self-hosted, linux]
+    
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        name: Azure OIDC login
+        with:         
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          subscription-id: ${{ inputs.Subscription_Id }}
+          enable-AzPSSession: true
+
+      - uses: azure/arm-deploy@v1
+        name: Create the Resource Group for Backend Hub
+        id: resourceGroupBackendHub
+        with:
+          scope: subscription
+          region: westeurope
+          subscriptionId: ${{ inputs.Subscription_Id }}
+          template: ./modules/backend/hub/resourceGroup.bicep
+          parameters: ./modules/backend/hub/parameters/resourceGroup.parameters.json
+
+      - uses: azure/arm-deploy@v1 
+        name: Deploy Backend Hub VNET
+        id: deployBackendHubVnet
+        with:
+          scope: resourcegroup
+          region: westeurope
+          resourcegroupname: ${{ steps.resourceGroupBackendHub.outputs.outResourceGroupName }}
+          template: ./modules/hub/backend/vnet.bicep
+          parameters: ./modules/backend/hub/parameters/vnet.parameters.json
