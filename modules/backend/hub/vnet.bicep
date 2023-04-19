@@ -31,8 +31,6 @@ param parSpokeToHubRouteTableName string = 'rtb-spoke-to-hub'
 @sys.description('Tags you would like to be applied to all resources in this module.')
 param parTags object = {}
 
-//If Ddos parameter is true Ddos will be Enabled on the Virtual Network
-//If Azure Firewall is enabled and Network DNS Proxy is enabled DNS will be configured to point to AzureFirewall
 resource resSpokeVirtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   name: parSpokeNetworkName
   location: parLocation

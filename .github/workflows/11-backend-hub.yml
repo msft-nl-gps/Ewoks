@@ -37,6 +37,16 @@ jobs:
           parameters: ./modules/backend/hub/parameters/resourceGroup.parameters.json
 
       - uses: azure/arm-deploy@v1 
+        name: Deploy Backend VNET NSG
+        id: deployBackendHubVnetNsg
+        with:
+          scope: resourcegroup
+          region: westeurope
+          resourcegroupname: ${{ steps.resourceGroupBackendHub.outputs.outResourceGroupName }}
+          template: ./modules/backend/hub/nsg.bicep
+          parameters: ./modules/backend/hub/parameters/nsg.parameters.json
+
+      - uses: azure/arm-deploy@v1 
         name: Deploy Backend Hub VNET
         id: deployBackendHubVnet
         with:

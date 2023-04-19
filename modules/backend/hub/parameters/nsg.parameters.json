@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "nsgIndex": {
+            "value": 1
+        },
+        "nsgName": {
+            "value": "nsg-backend"
+        },
+        "nsgLocation": {
+            "value": "westeurope"
+        },
+        "nsgSecurityRules": {
+            "value": [
+                {
+                    "description": "HTTP(S)",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRanges": [
+                        "80",
+                        "443"
+                    ],
+                    "sourceAddressPrefix": "*",
+                    "destinationAddressPrefix": "*",
+                    "access": "Allow",
+                    "priority": 110,
+                    "direction": "Inbound"
+                },
+                {
+                    "description": "Block All",
+                    "protocol": "*",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "*",
+                    "destinationAddressPrefix": "*",
+                    "access": "Deny",
+                    "priority": 4096,
+                    "direction": "Inbound",
+                    "sourcePortRanges": [],
+                    "destinationPortRanges": [],
+                    "sourceAddressPrefixes": [],
+                    "destinationAddressPrefixes": []
+                }
+            ]
+        }
+    }
+}
