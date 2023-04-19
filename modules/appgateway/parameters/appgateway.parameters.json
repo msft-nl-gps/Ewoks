@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "tierSkuName": {
+        "value": "WAF_v2"
+      },
+      "vnetname": {
+        "value": ""
+      },
+      "subnetName": {
+        "value": ""
+      },
+      "healthProbeHostName": {
+        "value": "api.ad.ewoks.nl"
+      },
+      "listenerHostName": {
+        "value": ""
+      },
+      "backendPoolHostName": {
+        "value": ""
+      }
+    }
+}
