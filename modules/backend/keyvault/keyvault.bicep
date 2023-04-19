@@ -35,7 +35,7 @@ resource resKeyvault 'Microsoft.KeyVault/vaults@2021-06-01-preview' = [for i in 
       defaultAction: kvtDefaultAction
       ipRules: [
         {
-          value: '20.123.167.188/32' // Axians DevOps Agents (through NAT gateway) in order to create and read secrets
+          value: '20.123.167.188/32'
         }
       ]
       virtualNetworkRules: []

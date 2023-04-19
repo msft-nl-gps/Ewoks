@@ -42,6 +42,6 @@ jobs:
         with:
           scope: resourcegroup
           region: westeurope
-          resourcegroupname: ${{ steps.resourceGroupAppKV.outputs.outResourceGroupName }}
+          resourcegroupname: ${{ steps.resourceGroupKV.outputs.outResourceGroupName }}
           template: ./modules/backend/keyvault/keyvault.bicep
           parameters: ./modules/backend/keyvault/keyvault.parameters.json        
